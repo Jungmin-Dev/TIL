@@ -69,6 +69,6 @@ Maven과 Gradle의 dependency에 starter 라이브러리만 작성해주면 Spri
 <h2>Spring VS Spring Boot</h2>
 Spring Boot는 톰캣과 같은 내장 서버가 존재한다. Spring의 경우 톰캣을 직접 설치하여 프로잭트 내에서 서버 설정및 버전관리를 해주어야 했지만, Spring Boot는 톰캣 내장 서버가 존재하여 설치와 버전 관리를 신경쓰지 않아도 된다.
 Spring에서는 servlet-context, root-context와 같은 xml 파일을 작성하여 웹과 관련된 설정 및 프로젝트 내의 의존성을 직접 관리해주어야 했지만, Spring Boot는 자동으로 의존성을 관리하여 준다.
-  
-  <br>
-  출처 : https://well-made-codestory.tistory.com/31 - SJ BackEnd Log
+
+<br>
+출처 : https://well-made-codestory.tistory.com/31 - SJ BackEnd Log
