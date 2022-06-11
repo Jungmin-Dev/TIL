@@ -33,7 +33,7 @@ Node.js는 논 블로킹 I/O의 특성을 활용하여 오래 걸리는 작업�
 이 때 비동기란 어떠한 작업이 끝날때 까지 기다리지 않고 다른 작업을 동시에 진행 함을 의미한다.
 즉, Node.js는 함수 호출이 발생시, 요청을 쌓아두어 동시에 처리하고 요청이 완료된 순서대로 처리한다. 
 Node.js는 싱글스레드의 이벤트 루프 기반의 논 블로킹 I/O를 모델로 함으로, I/O 요청이 많은 서버에 효율적이다. 하지만 싱글스레드를 사용하기 때문에, CPU 연산이 많거나 복잡한 프로그램에는 적합하지 못하게 된다. 즉 채팅 혹은 특정 값의 변화와 같은 많은 양의 작은 데이터를 주고 받는 프로그램에 Node.js는 효율적이다.
-<h2>Spring란?<h2>
+<h2>Spring란?</h2>
 Spring이란 오픈소스 기반의 Java 웹 애플리케이션을 개발 할 수 있는 Framework 이다. 즉, Java의 기술들을 더 쉽게 사용 가능하도록 Java에서 자주 사용하는 기능들의 집합이라고 할 수 있다.
 
 <h2>Spring Boot의 정의</h2>
@@ -70,4 +70,5 @@ Maven과 Gradle의 dependency에 starter 라이브러리만 작성해주면 Spri
 Spring Boot는 톰캣과 같은 내장 서버가 존재한다. Spring의 경우 톰캣을 직접 설치하여 프로잭트 내에서 서버 설정및 버전관리를 해주어야 했지만, Spring Boot는 톰캣 내장 서버가 존재하여 설치와 버전 관리를 신경쓰지 않아도 된다.
 Spring에서는 servlet-context, root-context와 같은 xml 파일을 작성하여 웹과 관련된 설정 및 프로젝트 내의 의존성을 직접 관리해주어야 했지만, Spring Boot는 자동으로 의존성을 관리하여 준다.
   
+  <br>
   출처 : https://well-made-codestory.tistory.com/31 - SJ BackEnd Log
