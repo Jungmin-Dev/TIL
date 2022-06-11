@@ -71,4 +71,5 @@ Spring Boot는 톰캣과 같은 내장 서버가 존재한다. Spring의 경우 
 Spring에서는 servlet-context, root-context와 같은 xml 파일을 작성하여 웹과 관련된 설정 및 프로젝트 내의 의존성을 직접 관리해주어야 했지만, Spring Boot는 자동으로 의존성을 관리하여 준다.
 
 <br>
+<br>
 출처 : https://well-made-codestory.tistory.com/31 - SJ BackEnd Log
