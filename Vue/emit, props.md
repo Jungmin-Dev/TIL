@@ -186,3 +186,7 @@ cf) this.num 에서 this는 vm 이다. num이 data로 감싸져 있지만 실제
   ```
   
   - `this.$emit('pass',10)` 에서 10의 값을 같이 올려보내면 `deliverNum(value)`가 실행될때 value에 10이 들어가게 된다.
+
+<br>
+
+출처 : https://hongdor.dev/84 - [장기효(캡틴판교) - Vue.js 시작하기] 4. props/ event
