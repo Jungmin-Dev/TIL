@@ -66,6 +66,15 @@ Maven과 Gradle의 dependency에 starter 라이브러리만 작성해주면 Spri
 이 때 Maven이란, 자바용 프로젝트 관리 툴로 자바에서만 사용 가능한 툴이다. Gradle또한 관리 툴이지만 Java 이외에도 Python 혹은 C++과 같은 다양한 언어를 지원하여준다.
 단독으로 실행이 가능한 Spring 애플리케이션을 생성한다.
 
+- 스프링을 편리하게 사용할 수 있도록 지원, 최근에는 기본으로 사용
+- 단독으로 실행할 수 있는 스프링 애플리케이션을 쉽게 생성
+- Tomcat 같은 웹 서버를 내장해서 별도의 웹 서버를 설치하지 않아도 됨
+- 손쉬운 빌드 구성을 위한 starter 종속성 제공
+- 스프링과 3rd parth(외부) 라이브러리 자동 구성
+- 메트릭, 상태 확인, 외부 구성 같은 프로덕션 준비 기능 제공
+- 관례에 의한 간결한 설정
+
+
 <h2>Spring VS Spring Boot</h2>
 Spring Boot는 톰캣과 같은 내장 서버가 존재한다. Spring의 경우 톰캣을 직접 설치하여 프로잭트 내에서 서버 설정및 버전관리를 해주어야 했지만, Spring Boot는 톰캣 내장 서버가 존재하여 설치와 버전 관리를 신경쓰지 않아도 된다.
 Spring에서는 servlet-context, root-context와 같은 xml 파일을 작성하여 웹과 관련된 설정 및 프로젝트 내의 의존성을 직접 관리해주어야 했지만, Spring Boot는 자동으로 의존성을 관리하여 준다.
@@ -73,3 +82,4 @@ Spring에서는 servlet-context, root-context와 같은 xml 파일을 작성하�
 <br>
 <br>
 출처 : https://well-made-codestory.tistory.com/31 - SJ BackEnd Log
+출처 : https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-%ED%95%B5%EC%8B%AC-%EC%9B%90%EB%A6%AC-%EA%B8%B0%EB%B3%B8%ED%8E%B8 - 스프링 핵심원리 - 김영한 (인프런)
