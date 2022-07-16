@@ -8,7 +8,8 @@
 <h2> nginx 세팅 </h2>
 <h3> repository 설정 </h3>
 - 리눅스 서버에서 아래와 같이 경로 이동한다
-- `cd /etc/yum.repos.d/`
+
+`cd /etc/yum.repos.d/`
 
 - `vi nginx.repo` 후 아래 내용 작성한다.
 ```
