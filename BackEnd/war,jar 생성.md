@@ -1,4 +1,4 @@
-<h1> Spring Boot War 생성 </h1>
+<h1> Spring Boot War, Jar 생성 </h1>
 
 <h2> Gradle build.gradle 설정 </h2>
 
@@ -35,6 +35,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
 }
 ```
 
-<h2> war 파일 생성 </h2>
+<h2> war, jar 파일 생성 </h2>
 
-![image](https://user-images.githubusercontent.com/74536458/179357714-f680844a-71bc-4fc7-bd39-59ec7b778cbb.png)
+![image](https://user-images.githubusercontent.com/74536458/179504059-ee64c605-0a6b-4713-b45a-d472ef6cdb98.png)
