@@ -1,4 +1,4 @@
-<h1> Spring Boot War, Jar 생성 </h1>
+<h1> Spring Boot War </h1>
 
 <h2> Gradle build.gradle 설정 </h2>
 
@@ -6,7 +6,7 @@ build.gradle 설정 파일에 아래 코드 추가
 
 `apply plugin: 'war'`
 
-<h2> Application 설정(war) </h2>
+<h2> Application 설정 </h2>
 
 - 해당 사항은 스프링부트 프로젝트 생성할 때 자동으로 만들어주기도 한다.
 
