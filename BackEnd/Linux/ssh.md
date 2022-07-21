@@ -138,5 +138,4 @@
 `0 18 1 * * /usr/bin/certbot renew --renew-hook="sudo systemctl restart apache2"`
 
 <br>
-<br>
 출처 : https://devlog.jwgo.kr/2019/04/16/how-to-lets-encrypt-ssl-renew/
