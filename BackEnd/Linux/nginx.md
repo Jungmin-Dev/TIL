@@ -41,7 +41,7 @@ server {
 }
 ```
  
-<h2> eginx 실행 및 정지 </h2>
+<h2> ginx 실행 및 정지 </h2>
 
 `systemctl enable nginx`
 
