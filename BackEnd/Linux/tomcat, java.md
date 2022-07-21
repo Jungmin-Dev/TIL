@@ -58,7 +58,7 @@ export JAVA_HOME PATH CLASSPATH CATALINA_HOME
 ...
 ```
 
-<h3>5. 8080 포트 열기</h3>
+<h3>6. 8080 포트 열기</h3>
 
 `firewall-cmd --permanent --zone=public --add-port=8080/tcp`
 
@@ -66,7 +66,7 @@ export JAVA_HOME PATH CLASSPATH CATALINA_HOME
 
 `iptables -I OUTPUT 1 -p tcp --dport 8080 -j ACCEPT`
 
-<h3>6. systemctl 등록</h3>
+<h3>7. systemctl 등록</h3>
 
 `vi /etc/systemd/system/tomcat.service`
 
@@ -89,7 +89,7 @@ ExecStop=/home/oracle/tool/tomcat8/bin/shutdown.sh
 WantedBy=multi-user.target
 ```
 
-<h3>6. 명령어 실행</h3>
+<h3>8. 명령어 실행</h3>
 
 `systemctl start tomcat`
 
