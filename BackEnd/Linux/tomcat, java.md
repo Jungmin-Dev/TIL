@@ -23,7 +23,7 @@
 
 <h3>3. 환경변수 설정 </h3>
 
-- 설치 경로는 /usr/lib/jvm/[자바버전] 의 경로확인
+- JAVA 설치 경로는 /usr/lib/jvm/[자바버전] 의 경로확인
 
 ![image](https://user-images.githubusercontent.com/74536458/180166616-26ba321c-2bc3-41c8-9726-d0d962a0ddee.png)
 
