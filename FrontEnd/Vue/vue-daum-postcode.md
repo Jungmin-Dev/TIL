@@ -19,7 +19,7 @@ Vue.use(VueDaumPostcode)
 
 ```
  
-2. vue-daum-postcode 사용하기
+2. vue-daum-postcode 사용
 
 ```html
 <template>
