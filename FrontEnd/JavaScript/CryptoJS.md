@@ -35,4 +35,5 @@ original: { username: 'Pierre-Emerick Aubameyang', age: 31 }
 encrypt: U2FsdGVkX187GNjaMrHiOvHXHjxEJnHN67ICG9gVqh0/us0FP6uugGEBCUJ28VRQakaVGy2YhydURaL9zgxoCoH24KSMv/JeKBSdbNge7Dc=
 decrypted: { username: 'Pierre-Emerick Aubameyang', age: 31 }
 ```
+
 출처 : https://daehopark.tistory.com/entry/NodeJS-CryptoJS-AES-%EC%95%94%EB%B3%B5%ED%98%B8%ED%99%94-%EC%98%88%EC%A0%9C [ [NodeJS] CryptoJS AES 암복호화 예제 ]
