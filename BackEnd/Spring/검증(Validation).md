@@ -1,75 +1,118 @@
 <h1> 검증(Validation) </h1>
 
-<h3> 1. Java Bean Validation (어노테이션 기반) </h3>
+<h3> Bean Validation이란 </h3>
 
-<h3> 2. Spring validator 인터페이스 구현을 통한 validation </h3>
+- 스프링에서 유효성 검증 로직을 구현하기 위한 사실상 표준
 
- 
+- 검사 대상 클래스에 어노테이션 기반 제약 조건을 선언하여 간결하게 유효성 검사가 가능하다.
 
-<h3> Java Bean Validation </h3>
+- Bean Validation을 사용하려면 validation 의존 관계를 추가해야 한다.
 
- -스프링 부트에서는 gradle에 의존성 하나만 추가해주면 간단하게 사용할 수 있다.
+`implementation 'org.springframework.boot:spring-boot-starter-validation'`
 
-`implementation("org.springframework.boot:spring-boot-starter-validation")`
+<h3> 검증 애노테이션 </h3>
 
-JavaBean 기반으로 간편하게 개별 데이터를 검증할 수 있으며, JavaBean내에 어노테이션으로 검증방법을 명시하면 된다. 
+- @NotBlank : 빈값 + 공백만 있는 경우를 허용하지 않는다.
+- @NotNull : null 을 허용하지 않는다.
+- @Range(min = 1000, max = 1000000) : 범위 안의 값이어야 한다.
+- @Max(9999) : 최대 9999까지만 허용한다.
 
-<h4> Validation의 주요 어노테이션 </h4>
+<h3> @NotNull, @NotEmpty, @NotBlank 의 차이점 </h3>
 
-- 회원가입을 위해 유저 정보를 담는 간단한 JavaBean을 생성하고 Validation을 적용하는 예시
+- @NotNull: Null만 허용하지 않는다. ""이나 " "은 가능하다.
+- @NotEmpty: null 과 "" 둘 다 허용하지 않게 합니다. " "은 가능하다.
+- @NotBlank: null 과 "" 과 " " 모두 허용하지 않습니다.
 
-```Java
-public class MemberCreationRequest {
-	@NotBlank(message="이름을 입력해주세요.")
-	@Size(max=50, message="이름의 최대 길이는 50자 입니다.")
-    	private String name;
-	@Min(0, "나이는 0보다 커야 합니다.")
-    	private int age;
-	@Email("이메일 형식이 잘못되었습니다.")
-    	private int email;
-   // getter와 setter 생략
+```java
+
+@Data
+public class ItemSaveForm {
+   @NotBlank
+    private String itemName;
+    
+    @NotNull @Range(min = 1000, max = 1000000)
+    private Integer price;
+    
+    @NotNull @Max(value = 9999)
+    private Integer quantity;
 }
 ```
 
-위처럼 DTO에 어노테이션으로 명시한 후 RequestBody에 @Valid 어노테이션을 달면 유효성 검증을 수행한 후 검증이 통과되었을 때에만 메서드 내부로 진입할 수 있고, 검증이 실패한다면 MethodArgumentNotValidException을 Throw를 던진다.
+<h4> 검증 순서 </h4>
 
-```Java
-@PostMapping(value = "/member")
-public MemeberCreationResponse createMember(
-	@Valid @RequestBody MemeberCreationRequest memeberCreationRequest) {
-	// 맴버 생성 로직 생략
-}
+1. @ModelAttribute 각각의 필드에 타입 변환 시도
+- 성공하면 다음으로
+- 실패하면 `errorCode=typeMismatch`로 `FieldError` 추가
+
+2. Validator 적용
+- 즉, 바인딩에 성공한 필드만 Bean Validation을 적용한다.
+
+<h3> 에러 코드 자동 생성 </h3>
+
+- `MessageCodesResolver`를 통해 메시지 코드가 순서대로 생성된다.
+
+1. 애노테이션.오브젝트.필드
+2. 애노테이션.필드
+3. 애노테이션.타입
+4. 애노테이션
+
+
+- @NotBlank
+	- NotBlank.item.itemName
+	- NotBlank.itemName
+	- NotBlank.java.lang.String
+	- NotBlank
+
+- @Range
+	- Range.item.price
+	- Range.price
+	- Range.java.lang.Integer
+	- Range
+	
+<h3> 메시지 등록 </h3>
+
+``` java
+#errors.properties 추가
+NotBlank={0} 공백X 
+Range={0}, {2} ~ {1} 허용
+Max={0}, 최대 {1}
 ```
 
-1차적으로는 Java Bean Validation을 사용해서 DTO단에서 데이터를 간단하게 검증 하고나서, 로직으로 넘어왔을 때 2차적으로 권한, 서비스 정책, 경우에 따라서는 외부 API호출이나 DB 조회를 통한 데이터 검증을 실시하고 검증 실패시에는 Custom Exception으로 예외를 던지고 이를 처리하는 방식으로 검증을 진행하면 좀 더 확실한 Validation이 가능하다.
+- {0} 은 필드명이고, {1} , {2} ...은 각 애노테이션 마다 다르다
 
-<h3> Spring Validator 인터페이스 구현 </h3>
+<h3> BeanValidation이 오류 메시지를 찾는 우선순위 </h3>
 
-- 유효성 검사를 수행하는 또다른 방법은 Validator 인터페이스를 구현하는 클래스를 생성하고 이를 스프링 빈으로 등록하는 방법
+1. 생성된 메시지 코드 순서대로 `messageSource` 에서 메시지 찾기
+2. 애노테이션의 message 속성 사용 `@NotBlank(message = "공백! {0}")`
+3. 라이브러리가 제공하는 기본 값 사용
 
-- Java Bean Validation에 비해서 조금 더 복잡한 로직을 갖는 유효성 검증이 가능하지만, Validation을 수행하는 클래스를 따로 정의하기 때문에 상대적으로 코드를 찾기 어렵고, 여러 군데 흩어져 있으면 테스트 및 유지보수가 어렵다는 단점이 있다.
+<h3> 오브젝트 오류 </h3>
+- @ScriptAssert() 를 사용하면 된다.
+- 그런데 실제 사용해보면 제약이 많고 복잡하다. 그리고 실무에서는 검증 기능이 해당 객체의 범위를 넘어서는 경우들도 종종 등장하는데, 그런 경우 대응이 어렵다.
+- 따라서 @ScriptAssert() 보다는 자바 코드에서 **bindingResult.reject**를 사용하는것을 추천한다.
 
-```Java
-@Component
-public class PersonValidator implements Validator {
-    public boolean supports(Class clazz) { // Validator를 동작시킬 조건
-        return Person.class.equals(clazz);
+``` java
+@PostMapping("/add")
+public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+   //특정 필드 예외가 아닌 전체 예외
+       if (item.getPrice() != null && item.getQuantity() != null) {
+       int resultPrice = item.getPrice() * item.getQuantity();
+       if (resultPrice < 10000) {
+          bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+       }
     }
-public void validate(Object obj, Errors e) { // 조건이 맞을 때 동작하게 될 Validation의 내용
-        ValidationUtils.rejectIfEmpty(e, "name", "name.empty");
-        Person p = (Person) obj;
-        if (p.getAge() < 0) {
-            e.rejectValue("age", "negativevalue");
-        } else if (p.getAge() > 110) {
-            e.rejectValue("age", "too.darn.old");
-        }
+    
+    if (bindingResult.hasErrors()) {
+       log.info("errors={}", bindingResult);
+       return "/add";
     }
+    
+    //성공 로직
+    Item savedItem = itemRepository.save(item);
+    redirectAttributes.addAttribute("itemId", savedItem.getId());
+    redirectAttributes.addAttribute("status", true);
+   return "redirect:/items/{itemId}";
 }
 ```
 
-- 위에 정의된 Validator는 Person이라는 javaBean이 등록되어 있을 때, 해당 인스턴스에서만 활용되는 Validator다.
-
-- supports 메서드는 이 validator가 동작할 조건을 정의하며(주로 class 타입을 비교) validate 메서드에서 원하는 검증을 진행하면 된다.
-
-
-출처 : https://jhkimmm.tistory.com/6 [[SpringCore] Validation (유효성 검증)]
+출처 : https://velog.io/@gmtmoney2357/%EC%8A%A4%ED%94%84%EB%A7%81-%EB%B6%80%ED%8A%B8-Bean-Validation - 스프링 부트 - 검증2: Bean Validation
