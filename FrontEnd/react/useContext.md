@@ -39,7 +39,7 @@ export default App;
 
 ```
 
-다 작성하셨으면 브라우저를 확인해보보자. 검정색 사각형이 나타났다.
+다 작성하셨으면 브라우저를 확인해보자. 검정색 사각형이 나타났다.
 
 ![image](https://user-images.githubusercontent.com/74536458/198812348-a8bd96a4-28fc-4deb-ae85-ad3a2bf9e7dd.png)
 
