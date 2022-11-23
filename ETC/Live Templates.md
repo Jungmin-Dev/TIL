@@ -42,4 +42,6 @@ void $METHOD_NAME$() {
 }
 ```
 
-모든 설정을 했다면 아래와 같이 만든 Live Template을 사용할 수 있다.
+- 모든 설정을 했다면 아래와 같이 만든 Live Template을 사용할 수 있다.
+
+출처 : https://hudi.blog/intellij-live-template/
