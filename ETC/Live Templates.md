@@ -38,10 +38,66 @@ void $METHOD_NAME$() {
   // when
 
   // then
-  org.assertj.core.api.Assertions.assertThat(1).isEqualTo(1)
+  org.assertj.core.api.Assertions.assertThat(1).isEqualTo(1);
 }
 ```
 
+controller, service Template
+
+```java
+//controller
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+
+@RequestMapping("/$END$")
+@Controller
+@RequiredArgsConstructor
+public class $METHOD_NAME$ {
+
+  // TODO: DI 주입 공간
+  // TODO: ex) private final NoticeService noticeService
+
+  @GetMapping
+  public ResponseEntity<?> get() {
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @PostMapping
+  public ResponseEntity<?> post() {
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @PutMapping
+  public ResponseEntity<?> put() {
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
+  @DeleteMapping
+  public ResponseEntity<?> delete() {
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+}
+
+// service
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+
+@Service
+@RequiredArgsConstructor
+public class $METHOD_NAME$ implements $END${
+
+  // TODO: DI 주입 공간 
+  // TODO: ex) private final NoticeRepository noticeRepository
+  
+}
+```
 - 모든 설정을 했다면 아래와 같이 만든 Live Template을 사용할 수 있다.
 
 출처 : https://hudi.blog/intellij-live-template/
