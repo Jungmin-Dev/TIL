@@ -63,4 +63,58 @@ Access Token 만료가 될 때마다 계속 과정 9~11을 거칠 필요는 없�
   14. 서버는 새로운 Access Token을 헤더에 실어 다시 API 요청 응답을 진행한다. 
 </h5>
 
+<h3> 📭 nestjs 기준 RefreshToken 인증 </h3>
+
+``` javascript
+    try {
+      const verify = this.jwtService.verify(token.refreshToken, {
+        secret: this.config.get('JWT_SECRET'),
+      });
+      if (verify) {
+        const userData = await this.agencyMemberRepository.findOne({
+          where: { uid: verify.uid, userPwd: verify.secretString },
+        });
+
+        const payload = { uid: userData.uid, secretString: userData.userPwd };
+        const accessToken = await this.jwtService.sign(payload, {
+          expiresIn: this.config.get('JWT_PUBLISH'),
+          secret: this.config.get('JWT_SECRET'),
+        });
+        return {
+          accessToken: accessToken,
+          refreshToken: token.refreshToken,
+        };
+      }
+    } catch (e) {
+      switch (e.message) {
+        // 토큰에 대한 오류를 판단합니다.
+        case 'invalid signature':
+          throw new HttpException(
+            {
+              errCode: 'xxx',
+              errMsg: '유효하지 않은 토큰입니다.',
+            },
+            401,
+          );
+
+        case 'jwt expired':
+          throw new HttpException(
+            {
+              errCode: 'xxx',
+              errMsg: '토큰이 만료되었습니다.',
+            },
+            410,
+          );
+        default:
+          throw new HttpException(
+            {
+              errCode: 'xxx',
+              errMsg: '서버 에러입니다.',
+            },
+            500,
+          );
+      }
+    }
+```
+
 출처 : https://inpa.tistory.com/entry/WEB-%F0%9F%93%9A-Access-Token-Refresh-Token-%EC%9B%90%EB%A6%AC-feat-JWT
