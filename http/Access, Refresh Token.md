@@ -65,6 +65,10 @@ Access Token 만료가 될 때마다 계속 과정 9~11을 거칠 필요는 없�
 
 <h3> 📭 nestjs 기준 RefreshToken 인증 </h3>
 
+-   `@UseGuards(AuthGuard())` 를 통해 토큰이 유효된 값 체크 후 잘못된 토큰이라면 Front-End에 에러코드를 던진다.
+-   토큰 에러 코드를 받은 Front-End는 RefreshToken 을 보내 accessToken 을 재 발급 받는다.
+-   재 발급 받는 소스는 아래와 같다.
+
 ``` javascript
     try {
       const verify = this.jwtService.verify(token.refreshToken, {
