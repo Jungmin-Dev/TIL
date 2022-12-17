@@ -40,6 +40,8 @@ Member findByUserName(@Param("name") String username);
 
 <h3> 벌크성 수정 쿼리 </h3>
 
+- 대량의 데이터들을 쿼리를 통해 수정한다는 것이다.
+
 ``` java
 @Modifying
 @Query("update Product p set p.price = p.price * 1.1 where p.stockAmount < :stockAmount")
